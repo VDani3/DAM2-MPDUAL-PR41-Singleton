@@ -1,42 +1,40 @@
-import java.lang.reflect.Constructor;
+import java.io.IOException;
+import java.util.*;
+
 
 public class Main {
-        public static void main(String[] args){
-            PR430Objecte instance0 = PR430Objecte.getInstance("Dani", "Villa", 18);
-            PR430Objecte instance1 = null;
-            PR430Objecte instance2 = null;
-
-            try{
-                Constructor[] constructors = PR430Objecte.class.getDeclaredConstructors();
-                for (Constructor constructor : constructors) {
-                    constructor.setAccessible(true);
-                    instance1 = (PR430Objecte) constructor.newInstance("Jaime", "Urquilla", 5);
-                    instance2 = (PR430Objecte) constructor.newInstance("Akane", "Minami", 21);
-                    break;
-                }
-            } catch (Exception e) { e.printStackTrace();}
-                //Printea
-            System.out.println(instance0);
-            System.out.println(instance1);
-            System.out.println(instance2);
+  static Scanner in = new Scanner(System.in); // System.in és global
+  // Main
+  public static void main(String[] args) throws InterruptedException, IOException {
+    boolean running = true;
+    while (running) {
+      String menu = "Escull una opció:";
+      menu = menu + "\n 0) PR430Objecte";
+      menu = menu + "\n 1) PR431Objecte";
+      menu = menu + "\n 100) Sortir";
+      System.out.println(menu);
 
 
-            /* 
-              //Exercici 0
-               //Fa la primera instancia
-            System.out.println("Iniciant 0");
-            PR430Objecte instance0 = PR430Objecte.getInstance("Dani", "Villa", 18);
-               //Intenta crear la segona (encara que rebra la primera)
-            System.out.println("Iniciant 1");
-            PR430Objecte instance1 = PR430Objecte.getInstance("Jaime", "Urquilla", 5);
-               //Intenta crear la tercera (encara que rebra la primera tambe)
-            System.out.println("Iniciant 2");
-            PR430Objecte instance2 = PR430Objecte.getInstance("Akane", "Minami", 21);
-               //Printea
-            System.out.println(instance0);
-            System.out.println(instance1);
-            System.out.println(instance2);
-            */
+      int opcio = Integer.valueOf(llegirLinia("Opció:"));
+      System.out.println();
+      try {
+        switch (opcio) {
+          case 0: PR430Objecte.main(args); break;
+          case 1: PR431Objecte.main(args); break;
+          case 100: running = false; break;
+          default: break;
         }
+      } catch (Exception e) {
+          System.out.println(e);
+      }
+    }
+    in.close();
+  }
+
+
+  static public String llegirLinia (String text) {
+    System.out.print(text);
+    return in.nextLine();
+  }
 }
 
